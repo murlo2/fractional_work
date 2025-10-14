@@ -47,8 +47,14 @@ const EditPlayerForm = ({ player, onSave, onCancel }) => {
     setError(null);
 
     try {
-      console.log('Updating player:', player.id, 'with data:', formData);
-      const response = await playerService.updatePlayer(player.id, formData);
+      // Include the existing description in the update to preserve it
+      const updateData = {
+        ...formData,
+        description: player.description // Preserve existing description
+      };
+      
+      console.log('Updating player:', player.id, 'with data:', updateData);
+      const response = await playerService.updatePlayer(player.id, updateData);
       console.log('Update response:', response.data);
       setSuccess(true);
       setError(null);

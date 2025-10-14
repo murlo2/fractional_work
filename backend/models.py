@@ -25,6 +25,7 @@ class Player(db.Model):
     on_base_percentage = db.Column(db.Float)
     slugging_percentage = db.Column(db.Float)
     on_base_plus_slugging = db.Column(db.Float)
+    description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -49,6 +50,7 @@ class Player(db.Model):
             'on_base_percentage': self.on_base_percentage,
             'slugging_percentage': self.slugging_percentage,
             'on_base_plus_slugging': self.on_base_plus_slugging,
+            'description': self.description,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }

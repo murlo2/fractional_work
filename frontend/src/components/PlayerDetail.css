@@ -146,6 +146,12 @@
   margin-bottom: 15px;
 }
 
+.description-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .player-description h3 {
   color: #2c3e50;
   margin: 0;
@@ -170,6 +176,32 @@
 .regenerate-button:hover {
   background: #218838;
   transform: translateY(-1px);
+}
+
+.save-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.save-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .loading-description {
@@ -197,6 +229,32 @@
   padding: 20px;
   border-radius: 8px;
   border-left: 4px solid #3498db;
+}
+
+.description-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #495057;
+  background: #f8f9fa;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.description-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  background: white;
+}
+
+.description-textarea::placeholder {
+  color: #6c757d;
+  font-style: italic;
 }
 
 .modal-actions {
@@ -274,7 +332,14 @@
     gap: 10px;
   }
   
-  .regenerate-button {
+  .description-actions {
     align-self: flex-end;
+    flex-wrap: wrap;
+  }
+  
+  .regenerate-button,
+  .save-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
   }
 }

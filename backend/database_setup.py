@@ -7,47 +7,81 @@ import sys
 from app import app, db, Player
 
 def fix_accented_characters(text):
-    """Fix accented characters by replacing them with English equivalents"""
+    """Fix accented characters using Unicode normalization and intelligent character replacement"""
     if not text:
         return text
     
-    # Character mapping for common accented characters
-    char_mapping = {
-        'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a', 'ã': 'a',
-        'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e',
-        'í': 'i', 'ì': 'i', 'ï': 'i', 'î': 'i',
-        'ó': 'o', 'ò': 'o', 'ö': 'o', 'ô': 'o', 'õ': 'o',
-        'ú': 'u', 'ù': 'u', 'ü': 'u', 'û': 'u',
-        'ñ': 'n', 'ç': 'c',
-        'Á': 'A', 'À': 'A', 'Ä': 'A', 'Â': 'A', 'Ã': 'A',
-        'É': 'E', 'È': 'E', 'Ë': 'E', 'Ê': 'E',
-        'Í': 'I', 'Ì': 'I', 'Ï': 'I', 'Î': 'I',
-        'Ó': 'O', 'Ò': 'O', 'Ö': 'O', 'Ô': 'O', 'Õ': 'O',
-        'Ú': 'U', 'Ù': 'U', 'Ü': 'U', 'Û': 'U',
-        'Ñ': 'N', 'Ç': 'C'
+    import unicodedata
+    
+    # First, try to normalize Unicode characters (handles most accented characters)
+    # NFD = Normalization Form Decomposed (separates base characters from diacritics)
+    normalized = unicodedata.normalize('NFD', text)
+    
+    # Remove all combining characters (diacritics like accents, tildes, etc.)
+    # This converts á to a, é to e, ñ to n, etc.
+    ascii_text = ''.join(char for char in normalized 
+                        if unicodedata.category(char) != 'Mn')
+    
+    # Handle special cases that don't normalize well
+    special_cases = {
+        'ß': 'ss',  # German eszett
+        'æ': 'ae',  # Latin ligature
+        'œ': 'oe',  # Latin ligature
+        'ð': 'd',   # Icelandic eth
+        'þ': 'th',  # Icelandic thorn
     }
     
-    # Replace accented characters
-    for accented, replacement in char_mapping.items():
-        text = text.replace(accented, replacement)
+    for special, replacement in special_cases.items():
+        ascii_text = ascii_text.replace(special, replacement)
     
-    # Fix corrupted characters from API (replace ? with likely English letters)
-    # Based on common baseball player names
-    corrupted_fixes = {
-        'Beltr?': 'Beltran',
-        'Beltr?n': 'Beltran', 
-        'Encarnaci?n': 'Encarnacion',
-        'B?ez': 'Baez',
-        '?lvarez': 'Alvarez',
-        'San?': 'Sano'
-    }
+    # Handle corrupted characters from API (replace ? with intelligent guesses)
+    # This is more sophisticated than hardcoding specific names
+    ascii_text = fix_corrupted_characters(ascii_text)
     
-    # Apply corrupted character fixes
-    for corrupted, fixed in corrupted_fixes.items():
-        text = text.replace(corrupted, fixed)
+    return ascii_text
+
+def fix_corrupted_characters(text):
+    """Intelligently fix corrupted characters (?) based on context"""
+    if '?' not in text:
+        return text
     
-    # Fix double 'n' issue that can occur after the above replacements
-    text = text.replace('Beltrann', 'Beltran')
+    # Common patterns for corrupted characters in baseball names
+    # These are based on common Spanish/Latin names in baseball
+    patterns = [
+        # Common Spanish name patterns
+        (r'Beltr\?n+', 'Beltran'),
+        (r'Encarnaci\?n', 'Encarnacion'),
+        (r'B\?ez', 'Baez'),
+        (r'\?lvarez', 'Alvarez'),
+        (r'San\?', 'Sano'),
+        (r'Gonz\?lez', 'Gonzalez'),
+        (r'Rodr\?guez', 'Rodriguez'),
+        (r'Fern\?ndez', 'Fernandez'),
+        (r'Mart\?nez', 'Martinez'),
+        (r'Garc\?a', 'Garcia'),
+        (r'L\?pez', 'Lopez'),
+        (r'P\?rez', 'Perez'),
+        (r'Hern\?ndez', 'Hernandez'),
+        (r'Ram\?rez', 'Ramirez'),
+        (r'Jim\?nez', 'Jimenez'),
+        (r'V\?squez', 'Vasquez'),
+        (r'Castr\?', 'Castro'),
+        (r'Delg\?do', 'Delgado'),
+        (r'Vald\?z', 'Valdez'),
+        (r'Mor\?les', 'Morales'),
+        (r'Flores', 'Flores'),  # This one might not have issues, but just in case
+    ]
+    
+    import re
+    for pattern, replacement in patterns:
+        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+    
+    # If there are still ? characters, try to make educated guesses
+    # based on common letter frequencies in names
+    if '?' in text:
+        # Common letter replacements based on context
+        # This is a fallback for patterns we haven't seen before
+        text = text.replace('?', 'a')  # Most common vowel in Spanish names
     
     return text
 

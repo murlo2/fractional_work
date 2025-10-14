@@ -25,9 +25,19 @@ export const playerService = {
     return api.put(`/players/${id}`, data);
   },
 
+  // Get player description
+  getDescription: (id) => {
+    return api.get(`/players/${id}/description`);
+  },
+
   // Generate player description
   generateDescription: (id) => {
     return api.post(`/players/${id}/description`);
+  },
+
+  // Save player description
+  saveDescription: (id, description) => {
+    return api.put(`/players/${id}/description`, { description });
   },
 
   // Seed database

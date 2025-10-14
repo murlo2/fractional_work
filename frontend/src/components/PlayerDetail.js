@@ -6,8 +6,25 @@ import './PlayerDetail.css';
 const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
   const [description, setDescription] = useState('');
   const [loadingDescription, setLoadingDescription] = useState(false);
+  const [savingDescription, setSavingDescription] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState(player);
+  const [descriptionChanged, setDescriptionChanged] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+  const loadDescription = useCallback(async () => {
+    try {
+      setLoadingDescription(true);
+      const response = await playerService.getDescription(currentPlayer.id);
+      setDescription(response.data.description || '');
+    } catch (err) {
+      console.error('Error loading description:', err);
+      setDescription('');
+    } finally {
+      setLoadingDescription(false);
+      setIsInitialLoad(false); // Mark initial load as complete
+    }
+  }, [currentPlayer.id]);
 
   const generateDescription = useCallback(async (forceRegenerate = false) => {
     // Only generate if no description exists or if forced
@@ -19,6 +36,7 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
       setLoadingDescription(true);
       const response = await playerService.generateDescription(currentPlayer.id);
       setDescription(response.data.description);
+      setDescriptionChanged(false); // Reset changed flag since it's auto-saved
     } catch (err) {
       console.error('Error generating description:', err);
       setDescription('Unable to generate description at this time.');
@@ -27,17 +45,42 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
     }
   }, [currentPlayer.id, description]);
 
+  const saveDescription = useCallback(async () => {
+    try {
+      setSavingDescription(true);
+      await playerService.saveDescription(currentPlayer.id, description);
+      setDescriptionChanged(false);
+    } catch (err) {
+      console.error('Error saving description:', err);
+      alert('Failed to save description. Please try again.');
+    } finally {
+      setSavingDescription(false);
+    }
+  }, [currentPlayer.id, description]);
+
   useEffect(() => {
-    // Only generate description if we don't have one yet
-    if (!description) {
+    // Load existing description when component mounts
+    loadDescription();
+  }, [loadDescription]);
+
+  // Auto-generate description if none exists after initial load only
+  useEffect(() => {
+    if (!loadingDescription && !description && isInitialLoad) {
       generateDescription();
     }
-  }, [generateDescription]);
+  }, [loadingDescription, description, isInitialLoad, generateDescription]);
 
   const handlePlayerUpdate = (updatedPlayer) => {
     console.log('Player updated:', updatedPlayer);
     setCurrentPlayer(updatedPlayer);
     setShowEditForm(false);
+    
+    // Preserve the existing description when updating player stats
+    // The description should remain unchanged unless explicitly regenerated
+    if (updatedPlayer.description && updatedPlayer.description !== description) {
+      setDescription(updatedPlayer.description);
+    }
+    
     // Don't automatically regenerate description - let user decide
     // Notify parent component to refresh the player list
     if (onPlayerUpdate) {
@@ -47,6 +90,11 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
 
   const handleRegenerateDescription = () => {
     generateDescription(true); // Force regenerate
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    setDescriptionChanged(true);
   };
 
   const handleEditClick = (e) => {
@@ -151,15 +199,27 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
           <div className="player-description">
             <div className="description-header">
               <h3>Player Description</h3>
-              {description && !loadingDescription && (
-                <button 
-                  className="regenerate-button"
-                  onClick={handleRegenerateDescription}
-                  title="Generate a new description"
-                >
-                  🔄 Regenerate
-                </button>
-              )}
+              <div className="description-actions">
+                {!loadingDescription && (
+                  <button 
+                    className="regenerate-button"
+                    onClick={handleRegenerateDescription}
+                    title="Generate a new description"
+                  >
+                    🔄 Regenerate
+                  </button>
+                )}
+                {descriptionChanged && (
+                  <button 
+                    className="save-button"
+                    onClick={saveDescription}
+                    disabled={savingDescription}
+                    title="Save description changes"
+                  >
+                    {savingDescription ? '💾 Saving...' : '💾 Save'}
+                  </button>
+                )}
+              </div>
             </div>
             {loadingDescription ? (
               <div className="loading-description">
@@ -167,7 +227,13 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
                 <span>Generating description...</span>
               </div>
             ) : (
-              <p className="description-text">{description}</p>
+              <textarea
+                className="description-textarea"
+                value={description}
+                onChange={handleDescriptionChange}
+                placeholder="No description available. Click 'Regenerate' to generate one."
+                rows={6}
+              />
             )}
           </div>
 

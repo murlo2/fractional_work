@@ -81,9 +81,7 @@ const PlayerList = () => {
 
   return (
     <div className="player-list-container">
-      <div className="header">
-        <h1>Baseball Player Statistics</h1>
-        <div className="controls">
+      <div className="controls">
           <div className="sort-controls">
             <label>Sort by:</label>
             <button

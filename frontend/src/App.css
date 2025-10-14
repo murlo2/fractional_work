@@ -1,3 +1,103 @@
+/* CSS Variables for Theme System */
+:root {
+  /* Light Theme (Default) */
+  --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #95a5a6;
+  --border-color: #e1e8ed;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+  --button-bg: #3498db;
+  --button-hover: #2980b9;
+  --button-text: #ffffff;
+  --success-color: #27ae60;
+  --error-color: #e74c3c;
+  --warning-color: #f39c12;
+  
+  /* Theme Toggle Variables */
+  --theme-toggle-bg: rgba(255, 255, 255, 0.9);
+  --theme-toggle-border: rgba(0, 0, 0, 0.1);
+  --theme-toggle-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --theme-option-hover-bg: rgba(52, 152, 219, 0.1);
+  --theme-option-hover-border: rgba(52, 152, 219, 0.3);
+  --theme-option-active-bg: rgba(52, 152, 219, 0.2);
+  --theme-option-active-border: #3498db;
+  --theme-option-active-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+  --cycle-button-bg: rgba(52, 152, 219, 0.1);
+  --cycle-button-border: rgba(52, 152, 219, 0.3);
+  --cycle-button-hover-bg: rgba(52, 152, 219, 0.2);
+  --cycle-button-hover-border: #3498db;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-primary: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  --bg-secondary: #2c3e50;
+  --bg-card: #34495e;
+  --text-primary: #ecf0f1;
+  --text-secondary: #bdc3c7;
+  --text-muted: #95a5a6;
+  --border-color: #4a5f7a;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.4);
+  --button-bg: #3498db;
+  --button-hover: #2980b9;
+  --button-text: #ffffff;
+  --success-color: #27ae60;
+  --error-color: #e74c3c;
+  --warning-color: #f39c12;
+  
+  /* Theme Toggle Variables for Dark */
+  --theme-toggle-bg: rgba(52, 73, 94, 0.9);
+  --theme-toggle-border: rgba(255, 255, 255, 0.1);
+  --theme-toggle-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --theme-option-hover-bg: rgba(52, 152, 219, 0.2);
+  --theme-option-hover-border: rgba(52, 152, 219, 0.5);
+  --theme-option-active-bg: rgba(52, 152, 219, 0.3);
+  --theme-option-active-border: #3498db;
+  --theme-option-active-shadow: 0 2px 4px rgba(52, 152, 219, 0.5);
+  --cycle-button-bg: rgba(52, 152, 219, 0.2);
+  --cycle-button-border: rgba(52, 152, 219, 0.5);
+  --cycle-button-hover-bg: rgba(52, 152, 219, 0.3);
+  --cycle-button-hover-border: #3498db;
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+  --bg-primary: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  --bg-secondary: #0a0a0a;
+  --bg-card: #1a1a2e;
+  --text-primary: #00ff88;
+  --text-secondary: #00d4ff;
+  --text-muted: #ff6b6b;
+  --border-color: #00ff88;
+  --shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  --shadow-hover: 0 0 30px rgba(0, 255, 136, 0.5);
+  --button-bg: #00ff88;
+  --button-hover: #00d4ff;
+  --button-text: #0a0a0a;
+  --success-color: #00ff88;
+  --error-color: #ff6b6b;
+  --warning-color: #ffd93d;
+  
+  /* Theme Toggle Variables for Neon */
+  --theme-toggle-bg: rgba(26, 26, 46, 0.9);
+  --theme-toggle-border: rgba(0, 255, 136, 0.3);
+  --theme-toggle-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  --theme-option-hover-bg: rgba(0, 255, 136, 0.1);
+  --theme-option-hover-border: rgba(0, 255, 136, 0.5);
+  --theme-option-active-bg: rgba(0, 255, 136, 0.2);
+  --theme-option-active-border: #00ff88;
+  --theme-option-active-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  --cycle-button-bg: rgba(0, 255, 136, 0.1);
+  --cycle-button-border: rgba(0, 255, 136, 0.5);
+  --cycle-button-hover-bg: rgba(0, 255, 136, 0.2);
+  --cycle-button-hover-border: #00ff88;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,13 +110,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-primary);
   min-height: 100vh;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .App {
   min-height: 100vh;
   padding: 20px 0;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  padding: 0 20px;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: var(--shadow);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+  }
 }
 
 code {
@@ -27,6 +158,7 @@ code {
 /* Global button styles */
 button {
   font-family: inherit;
+  transition: all 0.3s ease;
 }
 
 /* Scrollbar styling */
@@ -35,15 +167,15 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--bg-secondary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: var(--border-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: var(--text-secondary);
 }

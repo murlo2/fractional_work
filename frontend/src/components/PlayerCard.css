@@ -1,8 +1,8 @@
 .player-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -10,8 +10,8 @@
 
 .player-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border-color: #3498db;
+  box-shadow: var(--shadow-hover);
+  border-color: var(--button-bg);
 }
 
 .player-header {
@@ -23,7 +23,7 @@
 
 .player-name {
   margin: 0;
-  color: #2c3e50;
+  color: var(--text-primary);
   font-size: 1.3rem;
   font-weight: 600;
   line-height: 1.2;
@@ -39,7 +39,7 @@
 }
 
 .player-position {
-  color: #7f8c8d;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 15px;
   font-weight: 500;
@@ -63,19 +63,19 @@
 
 .stat-label {
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .stat-value {
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   font-size: 1rem;
 }
 
 .click-hint {
   text-align: center;
-  color: #95a5a6;
+  color: var(--text-muted);
   font-size: 0.8rem;
   font-style: italic;
   margin-top: 10px;

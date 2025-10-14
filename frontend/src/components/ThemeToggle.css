@@ -1,0 +1,124 @@
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: var(--theme-toggle-bg);
+  border-radius: 12px;
+  border: 1px solid var(--theme-toggle-border);
+  box-shadow: var(--theme-toggle-shadow);
+  transition: all 0.3s ease;
+}
+
+.theme-options {
+  display: flex;
+  gap: 4px;
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+.theme-option:hover {
+  background: var(--theme-option-hover-bg);
+  border-color: var(--theme-option-hover-border);
+  transform: translateY(-1px);
+}
+
+.theme-option.active {
+  background: var(--theme-option-active-bg);
+  border-color: var(--theme-option-active-border);
+  box-shadow: var(--theme-option-active-shadow);
+}
+
+.theme-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.theme-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.theme-cycle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--cycle-button-bg);
+  border: 1px solid var(--cycle-button-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-cycle-button:hover {
+  background: var(--cycle-button-hover-bg);
+  border-color: var(--cycle-button-hover-border);
+  transform: rotate(180deg);
+}
+
+.cycle-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .theme-toggle {
+    padding: 6px;
+    gap: 8px;
+  }
+  
+  .theme-option {
+    padding: 6px 8px;
+    min-width: 50px;
+  }
+  
+  .theme-icon {
+    font-size: 16px;
+  }
+  
+  .theme-label {
+    font-size: 10px;
+  }
+  
+  .theme-cycle-button {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .cycle-icon {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .theme-options {
+    order: 2;
+  }
+  
+  .theme-cycle-button {
+    order: 1;
+  }
+}

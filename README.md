@@ -94,7 +94,9 @@ cd frontend && npm start &
 - **Persistent storage** - All edits are saved to PostgreSQL database
 
 
-## Tech Stack
+## Technical Overview
+
+### Tech Stack
 - **Frontend**: React with modern CSS
 - **Backend**: Python (Flask) with SQLAlchemy
 - **Database**: PostgreSQL
@@ -360,8 +362,7 @@ psql -d baseball_db -c "SELECT COUNT(*) FROM players;"
 - `GET /api/health` - Health check
 
 
-## Project Structure
-
+### Project Structure
 ```
 fractional_work/
 ├── backend/

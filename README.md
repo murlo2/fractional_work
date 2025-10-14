@@ -2,38 +2,9 @@
 
 A full-stack application for viewing and managing baseball player statistics with LLM-generated player descriptions.
 
-## 🚀 Quick Start
+## 🧪 Features You Can Test
 
-### First Time Setup (Safe to Run Multiple Times)
-```bash
-./setup.sh
-```
-**Setup complete!** Your project is now ready to run.
-
-### After System Restart/Logout or before Demos
-```bash
-# Restart everything (PostgreSQL + app)
-./clean_restart.sh
-```
-
-# Or manual clean start
-pkill -f "python run.py" && pkill -f "react-scripts start"
-lsof -ti:3000 | xargs kill -9 && lsof -ti:5000 | xargs kill -9
-cd backend && source venv/bin/activate && python run.py &
-cd frontend && npm start &
-
-### Front End
-# Open: http://localhost:3000
-```
-
-### Demo Features to Show
-1. **Player Grid**: 172 players with stats, sorting available by several fields
-2. **Player Details**: Click any player card
-3. **Edit Player**: Click "Edit Player" button
-4. **Reload Data**: Click "⚠️ Reset to Original Data" button
-
-
-## **Browse & Sort Players**
+### **Browse & Sort Players**
 - **View 172 players** in a responsive grid layout
 - **Sort by multiple criteria**:
   - **Hits** (default) - See the top hitters
@@ -68,6 +39,36 @@ cd frontend && npm start &
 - **Desktop optimized** - Beautiful layout on larger screens
 - **Smooth animations** - Professional transitions and hover effects
 - **Modern UI** - Clean, intuitive interface
+
+## 🚀 Quick Start
+
+### First Time Setup (Safe to Run Multiple Times)
+```bash
+./setup.sh
+```
+**Setup complete!** Your project is now ready to run.
+
+### After System Restart/Logout or before Demos
+```bash
+# Restart everything (PostgreSQL + app)
+./clean_restart.sh
+```
+
+# Or manual clean start
+pkill -f "python run.py" && pkill -f "react-scripts start"
+lsof -ti:3000 | xargs kill -9 && lsof -ti:5000 | xargs kill -9
+cd backend && source venv/bin/activate && python run.py &
+cd frontend && npm start &
+
+### Front End
+# Open: http://localhost:3000
+```
+
+### Demo Features to Show
+1. **Player Grid**: 172 players with stats, sorting available by several fields
+2. **Player Details**: Click any player card
+3. **Edit Player**: Click "Edit Player" button
+4. **Reload Data**: Click "⚠️ Reset to Original Data" button
 
 ## Tech Stack
 - **Frontend**: React with modern CSS

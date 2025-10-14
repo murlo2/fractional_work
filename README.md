@@ -22,6 +22,12 @@ A full-stack application for viewing and managing baseball player statistics wit
 - Automatic description regeneration after edits
 - Responsive form layout
 
+### Responsive Design
+- Mobile-friendly - Works perfectly on phones and tablets
+- Desktop optimized - Beautiful layout on larger screens
+- Smooth animations - Professional transitions and hover effects
+- Modern UI - Clean, intuitive interface
+
 ## 🚀 Quick Start
 
 ### First Time Setup (Safe to Run Multiple Times)
@@ -87,11 +93,6 @@ cd frontend && npm start &
 - **Load from external API** - Fresh data from https://api.hirefraction.com/api/test/baseball
 - **Persistent storage** - All edits are saved to PostgreSQL database
 
-### **Responsive Design**
-- **Mobile-friendly** - Works perfectly on phones and tablets
-- **Desktop optimized** - Beautiful layout on larger screens
-- **Smooth animations** - Professional transitions and hover effects
-- **Modern UI** - Clean, intuitive interface
 
 ## Tech Stack
 - **Frontend**: React with modern CSS

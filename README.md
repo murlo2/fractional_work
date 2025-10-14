@@ -115,6 +115,27 @@ cd frontend && npm start &
 - `POST /api/seed` - Seed database with data from external API
 - `GET /api/health` - Health check
 
+### Project Structure
+```
+fractional_work/
+├── backend/
+│   ├── app.py              # Main Flask application
+│   ├── models.py           # Database models
+│   ├── config.py           # Configuration
+│   ├── requirements.txt    # Python dependencies
+│   ├── run.py             # Application runner
+│   └── database_setup.py  # Complete database setup script
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   ├── services/       # API service layer
+│   │   └── App.js         # Main app component
+│   ├── public/
+│   └── package.json       # Node.js dependencies
+├── setup.sh              # Automated setup script
+└── README.md
+```
+
 
 ## Complete Setup Guide
 
@@ -361,26 +382,6 @@ python database_setup.py
 psql -d baseball_db -c "SELECT COUNT(*) FROM players;"
 ```
 
-### Project Structure
-```
-fractional_work/
-├── backend/
-│   ├── app.py              # Main Flask application
-│   ├── models.py           # Database models
-│   ├── config.py           # Configuration
-│   ├── requirements.txt    # Python dependencies
-│   ├── run.py             # Application runner
-│   └── database_setup.py  # Complete database setup script
-├── frontend/
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── services/       # API service layer
-│   │   └── App.js         # Main app component
-│   ├── public/
-│   └── package.json       # Node.js dependencies
-├── setup.sh              # Automated setup script
-└── README.md
-```
 
 ## Development & Troubleshooting
 

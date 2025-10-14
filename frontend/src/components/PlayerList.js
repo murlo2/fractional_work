@@ -113,7 +113,6 @@ const PlayerList = () => {
               ⚠️ Reset to Original Data
             </button>
         </div>
-      </div>
 
       <div className="players-grid">
         {players.length === 0 ? (

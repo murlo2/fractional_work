@@ -1,6 +1,6 @@
 # Baseball Stats App
 
-A full-stack application for viewing and managing baseball player statistics with LLM-generated player descriptions.
+A full-stack application for viewing and managing baseball player statistics with LLM-generated player descriptions, comprehensive theme system, and advanced character encoding support.
 
 ## Features in Detail
 
@@ -12,15 +12,25 @@ A full-stack application for viewing and managing baseball player statistics wit
 
 ### Player Details
 - Modal overlay with comprehensive player information
-- LLM-generated descriptions using Google Gemini (free!)
+- **Cached LLM descriptions** - Generated once, stored in database
+- **Auto-generation** - Descriptions created automatically on first visit
+- **Manual editing** - Edit descriptions directly in textarea
+- **Regenerate button** - Create fresh descriptions when needed
 - Statistics displayed in an organized grid
 - Smooth animations and transitions
 
 ### Player Editing
 - Form validation and error handling
 - Real-time updates to the player list
-- Automatic description regeneration after edits
+- **Description preservation** - Descriptions remain intact when editing stats
 - Responsive form layout
+
+### Theme System
+- **Three beautiful themes**: Light, Dark, and Neon
+- **Theme toggle** - Switch between themes with one click
+- **Persistent themes** - Your choice is saved and remembered
+- **Perfect dark mode** - Excellent visibility for all text and digits
+- **Professional styling** - Clean, modern interface for all themes
 
 ### Responsive Design
 - Mobile-friendly - Works perfectly on phones and tablets
@@ -75,33 +85,47 @@ cd frontend && npm start &
 ### **Player Details & AI Descriptions**
 - **Click any player card** to see detailed information
 - **Comprehensive stats display** - All 18 baseball statistics in an organized grid
-- **AI-generated descriptions** - Powered by Google Gemini (free!)
-- **Sticky descriptions** - Once generated, descriptions stay until you manually regenerate
-- **🔄 Regenerate button** - Get fresh AI descriptions when you want them
+- **Smart description system**:
+  - **Auto-generation** - Descriptions created automatically on first visit (if none exist)
+  - **Cached descriptions** - Stored in database for instant loading
+  - **Manual editing** - Edit descriptions directly in textarea
+  - **🔄 Regenerate button** - Get fresh AI descriptions when you want them
+  - **💾 Save button** - Save manual edits to database
+- **Powered by Google Gemini** - Free AI descriptions for all players
 
 ### **Edit Player Data**
 - **Click "Edit Player"** in the detail view
 - **Comprehensive form** - Edit all 18 player statistics
 - **Real-time validation** - Form prevents invalid data entry
 - **Save changes** - Updates are immediately saved to PostgreSQL database
+- **Description preservation** - Player descriptions remain intact when editing stats
 - **Success feedback** - Green confirmation message when saved
 - **Auto-refresh** - Player list updates automatically after edits
+
+### **Theme System**
+- **🌞 Light Theme** - Clean, professional light mode
+- **🌙 Dark Theme** - Perfect visibility with excellent contrast
+- **⚡ Neon Theme** - Futuristic cyberpunk styling
+- **Theme toggle** - Switch between themes with one click
+- **Persistent themes** - Your choice is saved and remembered
 
 ### **Data Management**
 - **⚠️ Reset to Original Data** - Restore all players to original API values
 - **Confirmation dialog** - Prevents accidental data loss
 - **Load from external API** - Fresh data from https://api.hirefraction.com/api/test/baseball
 - **Persistent storage** - All edits are saved to PostgreSQL database
+- **Character encoding** - Proper handling of Spanish names (Beltran, Encarnacion, etc.)
 
 
 ## Technical Overview
 
 ### Tech Stack
-- **Frontend**: React with modern CSS
+- **Frontend**: React with modern CSS and theme system
 - **Backend**: Python (Flask) with SQLAlchemy
-- **Database**: PostgreSQL
+- **Database**: PostgreSQL with description caching
 - **External API**: https://api.hirefraction.com/api/test/baseball
 - **LLM**: Google Gemini for player descriptions (free!)
+- **Character Encoding**: Unicode normalization for Spanish names
 
 ### API Endpoints
 
@@ -109,30 +133,52 @@ cd frontend && npm start &
 - `GET /api/players?sort_by=hits&order=desc` - Get all players with sorting
 - `GET /api/players/<id>` - Get specific player
 - `PUT /api/players/<id>` - Update player data
-- `POST /api/players/<id>/description` - Generate LLM description for player
+
+#### Player Descriptions
+- `GET /api/players/<id>/description` - Get cached player description
+- `POST /api/players/<id>/description` - Generate and save new LLM description
+- `PUT /api/players/<id>/description` - Save manual description changes
 
 #### Utility
 - `POST /api/seed` - Seed database with data from external API
 - `GET /api/health` - Health check
 
+### Advanced Features
+
+#### Character Encoding System
+- **Unicode normalization** - Handles accented characters (á, é, ñ, etc.)
+- **Intelligent pattern matching** - Fixes corrupted characters from API
+- **Spanish name support** - Proper handling of Beltran, Encarnacion, Baez, etc.
+- **Automatic conversion** - Converts accented characters to ASCII equivalents
+
+#### Description Caching System
+- **Database storage** - Descriptions stored in PostgreSQL
+- **Auto-generation** - Creates descriptions on first visit if none exist
+- **Manual editing** - Users can edit descriptions directly
+- **Regeneration** - Fresh descriptions on demand
+- **Performance optimization** - No unnecessary LLM calls
+
 ### Project Structure
 ```
 fractional_work/
 ├── backend/
-│   ├── app.py              # Main Flask application
-│   ├── models.py           # Database models
+│   ├── app.py              # Main Flask application with description caching
+│   ├── models.py           # Database models with description field
 │   ├── config.py           # Configuration
 │   ├── requirements.txt    # Python dependencies
 │   ├── run.py             # Application runner
-│   └── database_setup.py  # Complete database setup script
+│   ├── database_setup.py  # Complete database setup script
+│   └── fix_encoding.py    # Character encoding fix utility
 ├── frontend/
 │   ├── src/
-│   │   ├── components/     # React components
+│   │   ├── components/     # React components (PlayerDetail, PlayerCard, etc.)
 │   │   ├── services/       # API service layer
+│   │   ├── contexts/       # Theme context provider
 │   │   └── App.js         # Main app component
 │   ├── public/
 │   └── package.json       # Node.js dependencies
 ├── setup.sh              # Automated setup script
+├── clean_restart.sh      # Clean restart script
 └── README.md
 ```
 

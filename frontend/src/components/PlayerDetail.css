@@ -34,7 +34,7 @@
 
 .modal-header h2 {
   margin: 0;
-  color: #2c3e50;
+  color: var(--text-primary);
   font-size: 1.8rem;
 }
 
@@ -81,12 +81,12 @@
 
 .label {
   font-weight: 600;
-  color: #495057;
+  color: var(--text-secondary);
   min-width: 100px;
 }
 
 .value {
-  color: #2c3e50;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .player-stats-detail h3 {
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 20px;
   font-size: 1.3rem;
 }
@@ -123,7 +123,7 @@
 .stat-label {
   display: block;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   margin-bottom: 5px;
   font-weight: 500;
 }
@@ -132,7 +132,7 @@
   display: block;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .player-description {
@@ -153,7 +153,7 @@
 }
 
 .player-description h3 {
-  color: #2c3e50;
+  color: var(--text-primary);
   margin: 0;
   font-size: 1.3rem;
 }
@@ -208,7 +208,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #6c757d;
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -222,38 +222,38 @@
 }
 
 .description-text {
-  color: #495057;
+  color: var(--text-primary);
   line-height: 1.6;
   font-size: 1rem;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   padding: 20px;
   border-radius: 8px;
-  border-left: 4px solid #3498db;
+  border-left: 4px solid var(--button-bg);
 }
 
 .description-textarea {
   width: 100%;
   min-height: 120px;
   padding: 15px;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.6;
-  color: #495057;
-  background: #f8f9fa;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
   resize: vertical;
   transition: border-color 0.3s ease;
 }
 
 .description-textarea:focus {
   outline: none;
-  border-color: #3498db;
-  background: white;
+  border-color: var(--button-bg);
+  background: var(--bg-card);
 }
 
 .description-textarea::placeholder {
-  color: #6c757d;
+  color: var(--text-muted);
   font-style: italic;
 }
 

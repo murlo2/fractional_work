@@ -2,6 +2,56 @@
 
 A full-stack application for viewing and managing baseball player statistics with LLM-generated player descriptions.
 
+## Features in Detail
+
+### Player List
+- Responsive grid layout that adapts to screen size
+- Sort by multiple criteria with visual indicators
+- Loading states and error handling
+- One-click data loading from external API
+
+### Player Details
+- Modal overlay with comprehensive player information
+- LLM-generated descriptions using Google Gemini (free!)
+- Statistics displayed in an organized grid
+- Smooth animations and transitions
+
+### Player Editing
+- Form validation and error handling
+- Real-time updates to the player list
+- Automatic description regeneration after edits
+- Responsive form layout
+
+## 🚀 Quick Start
+
+### First Time Setup (Safe to Run Multiple Times)
+```bash
+./setup.sh
+```
+**Setup complete!** Your project is now ready to run.
+
+### After System Restart/Logout or before Demos
+```bash
+# Restart everything (PostgreSQL + app)
+./clean_restart.sh
+```
+
+# Or manual clean start
+pkill -f "python run.py" && pkill -f "react-scripts start"
+lsof -ti:3000 | xargs kill -9 && lsof -ti:5000 | xargs kill -9
+cd backend && source venv/bin/activate && python run.py &
+cd frontend && npm start &
+
+### Front End
+# Open: http://localhost:3000
+```
+
+### Demo Features to Show
+1. **Player Grid**: 172 players with stats, sorting available by several fields
+2. **Player Details**: Click any player card
+3. **Edit Player**: Click "Edit Player" button
+4. **Reload Data**: Click "⚠️ Reset to Original Data" button
+
 ## 🧪 Features You Can Test
 
 ### **Browse & Sort Players**
@@ -39,36 +89,6 @@ A full-stack application for viewing and managing baseball player statistics wit
 - **Desktop optimized** - Beautiful layout on larger screens
 - **Smooth animations** - Professional transitions and hover effects
 - **Modern UI** - Clean, intuitive interface
-
-## 🚀 Quick Start
-
-### First Time Setup (Safe to Run Multiple Times)
-```bash
-./setup.sh
-```
-**Setup complete!** Your project is now ready to run.
-
-### After System Restart/Logout or before Demos
-```bash
-# Restart everything (PostgreSQL + app)
-./clean_restart.sh
-```
-
-# Or manual clean start
-pkill -f "python run.py" && pkill -f "react-scripts start"
-lsof -ti:3000 | xargs kill -9 && lsof -ti:5000 | xargs kill -9
-cd backend && source venv/bin/activate && python run.py &
-cd frontend && npm start &
-
-### Front End
-# Open: http://localhost:3000
-```
-
-### Demo Features to Show
-1. **Player Grid**: 172 players with stats, sorting available by several fields
-2. **Player Details**: Click any player card
-3. **Edit Player**: Click "Edit Player" button
-4. **Reload Data**: Click "⚠️ Reset to Original Data" button
 
 ## Tech Stack
 - **Frontend**: React with modern CSS
@@ -441,35 +461,6 @@ which python
 - **Frontend logs**: Check the terminal where you ran `npm start`
 - **Browser console**: Press F12 in your browser for frontend errors
 - **Network tab**: Check API calls in browser developer tools
-
-## Features in Detail
-
-### Player List
-- Responsive grid layout that adapts to screen size
-- Sort by multiple criteria with visual indicators
-- Loading states and error handling
-- One-click data loading from external API
-
-### Player Details
-- Modal overlay with comprehensive player information
-- LLM-generated descriptions using Google Gemini (free!)
-- Statistics displayed in an organized grid
-- Smooth animations and transitions
-
-### Player Editing
-- Form validation and error handling
-- Real-time updates to the player list
-- Automatic description regeneration after edits
-- Responsive form layout
-
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
 
 ## License
 

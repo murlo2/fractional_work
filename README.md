@@ -167,8 +167,7 @@ fractional_work/
 │   ├── config.py           # Configuration
 │   ├── requirements.txt    # Python dependencies
 │   ├── run.py             # Application runner
-│   ├── database_setup.py  # Complete database setup script
-│   └── fix_encoding.py    # Character encoding fix utility
+│   └── database_setup.py  # Complete database setup script
 ├── frontend/
 │   ├── src/
 │   │   ├── components/     # React components (PlayerDetail, PlayerCard, etc.)

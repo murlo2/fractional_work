@@ -36,13 +36,16 @@ A full-stack application for viewing and managing baseball player statistics wit
 ./clean_restart.sh
 ```
 
-# Or manual clean start
+### Manual Clean Start (Alternative)
+```bash
+# Stop all running processes
 pkill -f "python run.py" && pkill -f "react-scripts start"
 lsof -ti:3000 | xargs kill -9 && lsof -ti:5000 | xargs kill -9
+
+# Start backend and frontend
 cd backend && source venv/bin/activate && python run.py &
 cd frontend && npm start &
 
-### Front End
 # Open: http://localhost:3000
 ```
 
@@ -357,11 +360,21 @@ psql -d baseball_db -c "SELECT COUNT(*) FROM players;"
 
 ## Usage
 
+### Daily Use
+1. **Start the app**: `./clean_restart.sh`
+2. **Open browser**: http://localhost:3000
+3. **Load data**: Click "⚠️ Reset to Original Data" if needed
+4. **Browse players**: Sort by hits, home runs, batting average, or name
+5. **View details**: Click any player card
+6. **Edit players**: Click "Edit Player" in the detail view
+7. **Generate descriptions**: AI descriptions are created automatically
+
+### Demo Features to Show
 1. **Reset Data**: Click "⚠️ Reset to Original Data" to restore all players to original API values
-2. **Browse Players**: View players in a responsive grid layout
-3. **Sort Players**: Use the sort buttons to order by hits, home runs, batting average, or name
-4. **View Details**: Click on any player card to see detailed information and LLM-generated description
-5. **Edit Players**: Click "Edit Player" in the detail view to modify player data
+2. **Sort Players**: Use the sort buttons to organize by different statistics
+3. **Player Details**: Click any player to see comprehensive information
+4. **AI Descriptions**: View LLM-generated player descriptions
+5. **Edit Players**: Modify player statistics and see real-time updates
 
 ## Project Structure
 

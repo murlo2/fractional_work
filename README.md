@@ -103,6 +103,18 @@ cd frontend && npm start &
 - **External API**: https://api.hirefraction.com/api/test/baseball
 - **LLM**: Google Gemini for player descriptions (free!)
 
+### API Endpoints
+
+#### Players
+- `GET /api/players?sort_by=hits&order=desc` - Get all players with sorting
+- `GET /api/players/<id>` - Get specific player
+- `PUT /api/players/<id>` - Update player data
+- `POST /api/players/<id>/description` - Generate LLM description for player
+
+#### Utility
+- `POST /api/seed` - Seed database with data from external API
+- `GET /api/health` - Health check
+
 
 ## Complete Setup Guide
 
@@ -348,19 +360,6 @@ python database_setup.py
 # Check database status
 psql -d baseball_db -c "SELECT COUNT(*) FROM players;"
 ```
-
-## API Endpoints
-
-### Players
-- `GET /api/players?sort_by=hits&order=desc` - Get all players with sorting
-- `GET /api/players/<id>` - Get specific player
-- `PUT /api/players/<id>` - Update player data
-- `POST /api/players/<id>/description` - Generate LLM description for player
-
-### Utility
-- `POST /api/seed` - Seed database with data from external API
-- `GET /api/health` - Health check
-
 
 ### Project Structure
 ```

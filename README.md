@@ -505,6 +505,26 @@ which python
 - **Browser console**: Press F12 in your browser for frontend errors
 - **Network tab**: Check API calls in browser developer tools
 
+## 🚀 Production Deployment
+
+For production deployment on customer infrastructure, see the comprehensive [DEPLOYMENT.md](DEPLOYMENT.md) guide which covers:
+
+- **Docker deployment** (recommended for easy setup)
+- **Traditional server deployment** (Ubuntu/Debian)
+- **Cloud platform deployment** (AWS, DigitalOcean, GCP)
+- **SSL/HTTPS configuration**
+- **Monitoring and maintenance**
+- **Security considerations**
+- **Backup strategies**
+
+### Quick Production Start
+```bash
+# Docker deployment (recommended)
+cp env.production.example .env
+# Edit .env with your settings
+./deploy.sh
+```
+
 ## License
 
 This project is for educational purposes.

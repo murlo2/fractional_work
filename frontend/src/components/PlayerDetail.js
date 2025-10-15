@@ -120,10 +120,6 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
               <span className="label">Position:</span>
               <span className="value">{currentPlayer.position}</span>
             </div>
-            <div className="info-row">
-              <span className="label">Age:</span>
-              <span className="value">{currentPlayer.age || 'N/A'}</span>
-            </div>
           </div>
 
           <div className="player-stats-detail">

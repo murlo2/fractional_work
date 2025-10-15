@@ -189,6 +189,10 @@ const PlayerDetail = ({ player, onClose, onPlayerUpdate }) => {
                 <span className="stat-label">OPS</span>
                 <span className="stat-value">{currentPlayer.on_base_plus_slugging?.toFixed(3) || 'N/A'}</span>
               </div>
+              <div className="stat-item">
+                <span className="stat-label">Hits/Game</span>
+                <span className="stat-value">{currentPlayer.hits_per_game?.toFixed(3) || 'N/A'}</span>
+              </div>
             </div>
           </div>
 

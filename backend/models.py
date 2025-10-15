@@ -30,6 +30,9 @@ class Player(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     def to_dict(self):
+        # Calculate HitsPerGame on the fly
+        hits_per_game = round(self.hits / self.games, 3) if self.games > 0 else 0.0
+        
         return {
             'id': self.id,
             'name': self.name,
@@ -50,6 +53,7 @@ class Player(db.Model):
             'on_base_percentage': self.on_base_percentage,
             'slugging_percentage': self.slugging_percentage,
             'on_base_plus_slugging': self.on_base_plus_slugging,
+            'hits_per_game': hits_per_game,
             'description': self.description,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None

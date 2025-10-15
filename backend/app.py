@@ -112,19 +112,31 @@ def get_players():
     sort_by = request.args.get('sort_by', 'hits')
     order = request.args.get('order', 'desc')
     
-    if sort_by not in ['hits', 'home_runs', 'name', 'batting_average']:
+    if sort_by not in ['hits', 'home_runs', 'name', 'batting_average', 'hits_per_game']:
         sort_by = 'hits'
     
     if order not in ['asc', 'desc']:
         order = 'desc'
     
-    column = getattr(Player, sort_by)
-    if order == 'desc':
-        players = Player.query.order_by(column.desc()).all()
-    else:
-        players = Player.query.order_by(column.asc()).all()
+    # Get all players first
+    players = Player.query.all()
     
-    return jsonify([player.to_dict() for player in players])
+    # Convert to dict format
+    players_data = [player.to_dict() for player in players]
+    
+    # Handle hits_per_game sorting (calculated field)
+    if sort_by == 'hits_per_game':
+        players_data.sort(key=lambda x: x['hits_per_game'], reverse=(order == 'desc'))
+    else:
+        # For database fields, sort in the database
+        column = getattr(Player, sort_by)
+        if order == 'desc':
+            players = Player.query.order_by(column.desc()).all()
+        else:
+            players = Player.query.order_by(column.asc()).all()
+        players_data = [player.to_dict() for player in players]
+    
+    return jsonify(players_data)
 
 @app.route('/api/players/<int:player_id>', methods=['GET'])
 def get_player(player_id):

@@ -108,6 +108,12 @@ const PlayerList = () => {
             >
               Name {sortBy === 'name' && (order === 'desc' ? '↓' : '↑')}
             </button>
+            <button
+              className={`sort-button ${sortBy === 'hits_per_game' ? 'active' : ''}`}
+              onClick={() => handleSortChange('hits_per_game')}
+            >
+              Hits/Game {sortBy === 'hits_per_game' && (order === 'desc' ? '↓' : '↑')}
+            </button>
           </div>
             <button onClick={handleSeedDatabase} className="seed-button">
               ⚠️ Reset to Original Data

@@ -45,6 +45,10 @@ const PlayerCard = ({ player, onPlayerUpdate }) => {
             <span className="stat-label">Games:</span>
             <span className="stat-value">{player.games}</span>
           </div>
+          <div className="stat">
+            <span className="stat-label">H/G:</span>
+            <span className="stat-value">{player.hits_per_game?.toFixed(3) || 'N/A'}</span>
+          </div>
         </div>
         <div className="click-hint">Click to view details</div>
       </div>
